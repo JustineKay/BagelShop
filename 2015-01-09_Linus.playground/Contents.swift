@@ -29,25 +29,25 @@ class BagelShop {
     
     func processOrder(order:Order) {
         
-        if !isClosed() && !order.isCompleted && order.numberOfBagels <= self.numberOfBagels {
+        if !isClosed() && !order.isCompleted && order.numberOfBagels <= numberOfBagels {
             
-        self.numberOfBagels -= order.numberOfBagels
+        numberOfBagels -= order.numberOfBagels
             
         //Add totalPrice to self.totalEarnings
-        self.totalEarnings += order.totalPrice
+        totalEarnings += order.totalPrice
             
         order.isCompleted = true
             
             if isClosed() {
                 
-                print("Total Daily Earnings: $\(self.totalEarnings)")
+                print("Total Daily Earnings: $\(totalEarnings)")
             }
         
         } else if isClosed() {
             
             print("Sorry, we're closed!")
         
-        } else if order.numberOfBagels > self.numberOfBagels {
+        } else if order.numberOfBagels > numberOfBagels {
             
             print("Sorry, we don't have enough bagels left to cover your order.")
         }
@@ -110,19 +110,14 @@ class Order {
 
 class Bagel {
     
-    let price: Double
+    let price = 1.50
     var description: String
     
-    init(price: Double, description: String) {
+    init(description: String) {
         
-        self.price = price
         self.description = description
     }
-    
-    convenience init() {
-        
-        self.init(price: 1.50, description: "Plain")
-    }
+
 }
 
 
@@ -135,19 +130,12 @@ class Bagel {
 
 let bagelShop = BagelShop()
 
-let eBagel = Bagel()
-eBagel.description = "Everything"
-let oBagel = Bagel()
-oBagel.description = "Onion"
-let pBagel = Bagel()
-pBagel.description = "Poppyseed"
-let bBagel = Bagel()
-eBagel.description = "Blueberry"
-let puBagel = Bagel()
-oBagel.description = "Pumpernickel"
-let cRBagel = Bagel()
-pBagel.description = "Cinnamon Raisin"
-
+let eBagel = Bagel(description: "Everything")
+let oBagel = Bagel(description: "Onion")
+let pBagel = Bagel(description: "Poppyseed")
+let bBagel = Bagel(description:"Blueberry")
+let puBagel = Bagel(description: "Pumpernickel")
+let cRBagel = Bagel(description: "Cinnamon Raisin")
 
 let order1 = Order(bagels: [eBagel, oBagel, bBagel])
 bagelShop.processOrder(order1)
